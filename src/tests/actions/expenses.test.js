@@ -1,4 +1,4 @@
-import { addExpense, startAddExpense, editExpense, removeExpense, setExpenses, startSetExpenses } from '../../actions/expenses';
+import { addExpense, startAddExpense, editExpense, removeExpense, setExpenses, startSetExpenses, startRemoveExpense } from '../../actions/expenses';
 import uuid from 'uuid';
 import expenses from '../fixtures/expenses';
 import database from '../../firebase/firebase';
@@ -143,4 +143,22 @@ test('should fetch expenses from DB on app load', (done) => {
 		});
 		done();
 	});
+});
+
+test('should remove expense by id on firebase and store', (done) => {
+	const store = createMockStore({});
+	const id = expenses[0].id;
+	store.dispatch(startRemoveExpense({ id })).then(() => {
+		const actions = store.getActions();
+		expect(actions[0]).toEqual({
+			type: 'REMOVE_EXPENSE',
+			id
+		});
+		return database.ref(`expenses/${id}`).once('value');
+		})
+		.then((snapshot) => {
+			expect(snapshot.val()).toEqual(null);
+			expect(snapshot.val()).toBeFalsy();			// equal to the line above. null's considered falsy
+			done();
+		});
 });
