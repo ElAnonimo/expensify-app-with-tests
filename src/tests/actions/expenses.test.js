@@ -122,7 +122,7 @@ test('should add expense with defaults to database and store', (done) => {
 	});
 });
 
-test('should set up addExpense action object with defaults', () => {
+/* test('should set up addExpense action object with defaults', () => {
 	const action = addExpense();
 	expect(action).toEqual({
 		type: 'ADD_EXPENSE',
@@ -134,7 +134,7 @@ test('should set up addExpense action object with defaults', () => {
 			createdAt: 0
 		}
 	});
-});
+}); */
 
 test('should set up expense action object with data', () => {
 	const action = setExpenses(expenses);

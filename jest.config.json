@@ -1,4 +1,6 @@
 {
 	"setupFiles": [ "raf/polyfill", "<rootDir>/src/tests/setupTests.js" ],
-	"snapshotSerializers": [ "enzyme-to-json/serializer" ]
+	"snapshotSerializers": [ "enzyme-to-json/serializer" ],
+	"verbose": true,
+	"testURL": "https://expensify-test-dfbf5.firebaseio.com"
 }
